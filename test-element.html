@@ -8,44 +8,40 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
 <link rel="import" href="../polymer/polymer.html">
-
 <!--
 An element providing a solution to no problem in particular.
 
 Example:
 
-    <test-element></test-element>
+	<test-element></test-element>
 
 @demo
 -->
 <dom-module id="test-element">
+	<style>
+		:host {
+			display: block;
+			box-sizing: border-box;
+		}
 
-  <style>
-    :host {
-      display: block;
-      box-sizing: border-box;
-    }
-
-    .author img {
-      float: left;
-      margin-right: 5px;
-      max-height: 100px;
-      max-width: 100px;
-    }
-  </style>
-
-  <template>
-    <h1>&lt;test-element&gt;</h1>
-    <content></content>
-    <p class="author">
-      <img src="{{author.image}}">
-      Cheers,<br/>
-      <span class="name">{{author.name}}</span>
-    </p>
-  </template>
-
+		.author img {
+			float: left;
+			margin-right: 5px;
+			max-height: 100px;
+			max-width: 100px;
+		}
+	</style>
+	<template>
+		<h1>&lt;test-element&gt;</h1>
+		<content></content>
+		<p class="author">
+			<img src="{{author.image}}">
+			Cheers,<br />
+			<span class="name">{{author.name}}</span>
+			<div>My penultimate number is [[penultimateString]]</div>
+		</p>
+	</template>
 </dom-module>
-
 <script>
 
   Polymer({
@@ -85,6 +81,21 @@ Example:
         }
       },
 
+      penultimate: {
+      	type: Number,
+		value: 0
+      },
+
+      penultimateString: {
+      	type: String,
+      	value: "uninitialized",
+		computed: "calculateString(penultimate)"
+      }
+
+    },
+
+    calculateString: function(number) {
+    	return "***" + number + "***";
     },
 
     // Element Lifecycle
